@@ -2,9 +2,22 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
+const topTen = [
+  'American Shorthair',
+  'Persian',
+  'Maine Coon',
+  'Ragdoll',
+  'Abyssinian',
+  'Sphynx',
+  'Siamese',
+  'Scottish Fold',
+  'Bengal',
+  'Birman',
+];
+
 class CatController {
   constructor() {}
-  getAll = async (req, res) => {
+  renew = async (req, res) => {
     const url = `${process.env.CAT_URL}breeds?api_key=${process.env.API_KEY}`;
     try {
       let result = await axios.get(url);
@@ -12,8 +25,8 @@ class CatController {
       let file = [];
       data.forEach((breed) => {
         file.push({
-          name: breed.name,
-          id: breed.id,
+          name: breed?.name,
+          id: breed?.id,
         });
       });
       fs.writeFile(
@@ -24,6 +37,30 @@ class CatController {
         }
       );
       res.status(200).json({ data });
+    } catch (err) {
+      console.log(err);
+      res.status(404).send('something went wrong');
+    }
+  };
+  getTop = async (req, res) => {
+    const url = `${process.env.CAT_URL}breeds?api_key=${process.env.API_KEY}`;
+    try {
+      let result = await axios.get(url);
+      const data = result.data;
+      let newData = [];
+      data
+        .filter((breed) => topTen.indexOf(breed?.name) !== -1)
+        .forEach((breed) => {
+          let newBreed = {
+            top: topTen.indexOf(breed?.name) + 1,
+            name: breed?.name,
+            id: breed?.id,
+            description: breed?.description,
+            image: breed?.image?.url,
+          };
+          newData.push(newBreed);
+        });
+      res.status(200).json({ data: newData.sort((a, b) => a.top - b.top) });
     } catch (err) {
       console.log(err);
       res.status(404).send('something went wrong');
