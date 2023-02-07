@@ -40,7 +40,6 @@
 ![screenshot](./screenshot.png)
 
 - You can see the demo at [Netlify](https://mqdo-cat-wiki.netlify.app/)
-- What was your experience?
 - This challenge was really fun, at first I thought it would be easy but when doing it some problems happened. Luckily in the end I managed to get over it and completed the challenge.
 - In this challenge, I practiced handling data at server side and making more complex design in client side.
 
