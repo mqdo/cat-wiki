@@ -44,9 +44,9 @@ const MostSearched = () => {
       </div>
       <div className='pt-8 grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-12'>
         {topBreeds.map((breed) => (
-          <Link key={breed.id} to={'/' + breed.id} className='mx-auto'>
+          <Link key={breed.id} to={'/breed/' + breed.id} className='mx-auto'>
             <div className='flex flex-col mx-auto gap-3 md:gap-5 justify-around'>
-              <img src={breed.image || image2} className='w-[150px] h-[150px] md:w-[220px] md:h-[220px] object-cover rounded-3xl' alt='placeholder' />
+              <img src={breed.image || image2} className='w-[150px] h-[150px] md:w-[220px] md:h-[220px] object-cover rounded-3xl' alt={breed.id || 'placeholder'} />
               <p className='font-semibold text-sm md:text-lg'>
                 {breed.name || 'Breed Name'}
               </p>

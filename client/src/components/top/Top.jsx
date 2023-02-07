@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 import BreedCard from './BreedCard'
 
 const Top = () => {
   const [topBreeds, setTopBreeds] = useState([]);
+
+  const navigate = useNavigate()
 
   const getBreeds = async () => {
     const url = import.meta.env.VITE_SERVER_URL + 'cat/top';

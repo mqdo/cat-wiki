@@ -76,6 +76,7 @@ class CatController {
         id,
         name,
         description,
+        temperament,
         origin,
         life_span,
         adaptability,
@@ -85,8 +86,12 @@ class CatController {
         intelligence,
         health_issues,
         social_needs,
-        strangers_friendly,
+        stranger_friendly,
+        reference_image_id,
       } = breedResult.data;
+      const refUrl = `${process.env.CAT_URL}images/${reference_image_id}?api_key=${process.env.API_KEY}`;
+      let refResult = await axios.get(refUrl);
+      const refImage = refResult.data.url;
       let imageResult = await axios.get(imageUrl);
       const images = imageResult.data.map((image) => ({
         id: image.id,
@@ -95,19 +100,23 @@ class CatController {
         height: image.height,
       }));
       const newData = {
-        id,
-        name,
-        description,
-        origin,
-        life_span,
-        adaptability,
-        affection_level,
-        child_friendly,
-        grooming,
-        intelligence,
-        health_issues,
-        social_needs,
-        strangers_friendly,
+        details: {
+          id,
+          name,
+          description,
+          temperament,
+          origin,
+          life_span,
+          adaptability,
+          affection_level,
+          child_friendly,
+          grooming,
+          intelligence,
+          health_issues,
+          social_needs,
+          stranger_friendly,
+          refImage,
+        },
         images,
       };
       res.status(200).json({ data: newData });
