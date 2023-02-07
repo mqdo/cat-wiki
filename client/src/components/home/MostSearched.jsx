@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 import { BsArrowRight } from 'react-icons/bs'
@@ -8,6 +8,8 @@ import image2 from '../../assets/image 2.png'
 const MostSearched = () => {
   const [topBreeds, setTopBreeds] = useState([]);
 
+  const navigate = useNavigate();
+
   const getBreeds = async () => {
     const url = import.meta.env.VITE_SERVER_URL + 'cat/top';
     try {
@@ -15,6 +17,7 @@ const MostSearched = () => {
       setTopBreeds(data.data.slice(0, 4));
     } catch (e) {
       console.error(e);
+      navigate('/error');
     }
   }
 
