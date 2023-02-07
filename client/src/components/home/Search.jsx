@@ -61,15 +61,17 @@ const Search = () => {
           autoComplete='false'
           onChange={handleChangeInput}
         />
-        <div className={`w-full h-40 pl-6 pr-2 py-4 bg-white absolute top-[110%] rounded-3xl ${breeds.length === 0 ? 'hidden' : ''}`}>
-          <div className='w-full h-full text-ellipsis overflow-y-auto flex flex-col gap-2 font-medium'>
-            {breeds.map((breed) => (
-              <Link to={'/breed/' + breed.id} key={breed.id}>
-                <div className='w-full p-2 rounded-lg hover:bg-gray-100'>
-                  {breed.name}
-                </div>
-              </Link>
-            ))}
+        <div className={`w-full h-40 pl-6 pr-4 py-4 bg-white absolute top-[110%] rounded-3xl ${breeds.length === 0 ? 'hidden' : ''}`}>
+          <div className='w-full h-full pr-2 overflow-y-auto'>
+            <div className='w-full h-full text-ellipsis flex flex-col gap-2 font-medium'>
+              {breeds.map((breed) => (
+                <Link to={'/breed/' + breed.id} key={breed.id}>
+                  <div className='w-full p-2 rounded-lg hover:bg-gray-100'>
+                    {breed.name}
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
